@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Crossword Puzzle</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="generate-value">
+            <h1>Enter the words</h1>
+            <div class="input-container">
+                <input type="text" id="word" placeholder="Enter the word" />
+                <button id="add-word">Add Word</button>
+            </div>
+            <div class="words-container">
+                <h2>Words</h2>
+                <ul id="words"></ul>
+            </div>
+            <input type="text" id="keyWork" />
+            <button id="generate-crossword">Generate Crossword</button>
+        </div>
+        <div class="container">
+            <h1>Crossword Puzzle</h1>
+            <div id="crossword-grid"></div>
+        </div>
+    </body>
+    <script src="main.js"></script>
+</html>

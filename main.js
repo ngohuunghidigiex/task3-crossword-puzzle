@@ -1,4 +1,4 @@
-const words = [
+var words = [
     'phamthithanhngan', // T
     'nghingo', // I
     'khoatran', // T
@@ -9,22 +9,46 @@ const words = [
 ];
 
 const liWords = document.getElementById('words');
+const addWord = document.getElementById('add-word');
+let grid = document.getElementById('crossword-grid');
+const getKeyword = document.getElementById('get-keyword');
+const generate = document.getElementById('generate-crossword');
+var keyWord = [];
+
 words.forEach((word) => {
     const li = document.createElement('li');
     li.innerHTML = word;
     liWords.appendChild(li);
 });
 
-const keyWord = ['t', 'i', 't', 'a', 'n', 'i', 'c'];
+addWord.addEventListener('click', () => {
+    const word = document.getElementById('word').value;
+    const li = document.createElement('li');
+    li.innerHTML = word;
+    liWords.appendChild(li);
+    words.push(word);
+});
+
+generate.addEventListener('click', () => {
+    keyWord = getKeyword.value.split('');
+    const positions = findKeyWordPositions(words, keyWord);
+    console.log(positions);
+    console.log(keyWord);
+    const game = renderGame(positions);
+
+    grid.innerHTML = '';
+    grid.appendChild(game);
+});
 
 function findKeyWordPositions(words, keyWord) {
     const positions = [];
+    const tempWord = [...words];
     keyWord.forEach((char) => {
-        for (let i = 0; i < words.length; i++) {
-            const index = words[i].indexOf(char);
+        for (let i = 0; i < tempWord.length; i++) {
+            const index = tempWord[i].indexOf(char);
             if (index !== -1) {
-                positions.push({ word: words[i], position: index, char });
-                words.splice(i, 1);
+                positions.push({ word: tempWord[i], position: index, char });
+                tempWord.splice(i, 1);
                 break;
             }
         }
@@ -60,11 +84,3 @@ function renderGame(position) {
     }
     return game;
 }
-
-let grid = document.getElementById('crossword-grid');
-const positions = findKeyWordPositions(words, keyWord);
-const game = renderGame(positions);
-
-console.log(positions);
-
-grid.appendChild(game);
